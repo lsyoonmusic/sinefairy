@@ -22,19 +22,16 @@ private:
     LookAndFeelSineFairy laf;
     HarmonicSpectrumView spectrumView;
 
-    // 1. Pitch Tracker Controls
-    juce::Slider minF0Knob, maxF0Knob, trackSpeedKnob;
+    // Card 1: Surgical Tracking Low-Cut & Pitch Range
+    juce::ComboBox slopeBox, phaseModeBox;
+    juce::Slider offsetKnob, floorKnob, minF0Knob, maxF0Knob;
 
-    // 2. Pitch-Tracking Low-Cut Controls
-    juce::ComboBox slopeBox;
-    juce::Slider offsetKnob, floorKnob;
-
-    // 3. Harmonic Sine Reconstructor Controls
+    // Card 2: HQ Lookahead Phase-Locked 20-Harmonic Reconstructor
     juce::ComboBox resynthModeBox;
-    juce::Slider numHarmKnob, resynthMixKnob, purityBwKnob;
-    juce::Slider h1Knob, h2Knob, h3Knob, h4Knob;
+    juce::Slider numHarmKnob, resynthMixKnob, purityKnob;
+    juce::Slider h1Knob, h2Knob, h34Knob, h5UpKnob;
 
-    // 4. Bottom Audition & Utility Bar
+    // Card 3: Audition & Output
     juce::ComboBox auditionBox;
     juce::Slider outGainKnob;
     juce::ToggleButton bypassBtn { "BYPASS" };
@@ -43,12 +40,11 @@ private:
     using CAtt = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
     using BAtt = juce::AudioProcessorValueTreeState::ButtonAttachment;
 
-    std::unique_ptr<SAtt> attMinF0, attMaxF0, attTrackSpeed;
-    std::unique_ptr<CAtt> attSlope;
-    std::unique_ptr<SAtt> attOffset, attFloor;
+    std::unique_ptr<CAtt> attSlope, attPhaseMode;
+    std::unique_ptr<SAtt> attOffset, attFloor, attMinF0, attMaxF0;
     std::unique_ptr<CAtt> attResynthMode;
-    std::unique_ptr<SAtt> attNumHarm, attResynthMix, attPurityBw;
-    std::unique_ptr<SAtt> attH1, attH2, attH3, attH4;
+    std::unique_ptr<SAtt> attNumHarm, attResynthMix, attPurity;
+    std::unique_ptr<SAtt> attH1, attH2, attH34, attH5Up;
     std::unique_ptr<CAtt> attAudition;
     std::unique_ptr<SAtt> attOutGain;
     std::unique_ptr<BAtt> attBypass;
